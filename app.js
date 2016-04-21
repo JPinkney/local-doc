@@ -33,12 +33,9 @@ app.get('/modules', function(req, res, next) {
             }
         });
         
-        
-        
         console.log(output);
         res.send(output.join("\n"));
-        //return output;
-    
+            
     });
 
 });

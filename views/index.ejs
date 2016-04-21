@@ -4,9 +4,8 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.js"></script>  
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
       
     <style type="text/css">
     
@@ -36,23 +35,27 @@
   </head>
   <body>
       <div id="container"> 
-          <input class="modules" type="text" placeholder="search"><input id="search-button" type="button" value="Search">
+          <input id="modules" type="text" placeholder="search"><input id="search-button" type="button" value="Search">
           
           <div class="result"></div>
-      </div>
-    
-      
+      </div>      
       
       <script type="text/javascript">
-          
-          $("#search-button").on('click', function(){
+          $(function() {
+      
               $.get('/modules', function(data){
-                    $('.result').html(data);  
-                    var result = data.split("\n");
-                    alert(result[0]);
+                        $('.result').html(data);  
+                        var results = data.split("\n");
+                  
+                        $( "#modules" ).autocomplete({
+                            source: results
+                        });
+              });      
+
+              $("#search-button").on('click', function(){
+                    //Do the markdown rendering and stuff
               });
-          });
-          
+        });   
       </script>
       
   </body>
