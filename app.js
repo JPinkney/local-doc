@@ -4,6 +4,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var hljs = require('highlight.js'); // https://highlightjs.org/
+
+var md = require('markdown-it')({
+  html: true,
+  linkify: true,
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+               hljs.highlight(lang, str, true).value +
+               '</code></pre>';
+      } catch (__) {}
+    }
+ 
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+  }
+});
 
 var routes = require('./routes/index');
 
@@ -32,12 +50,21 @@ app.get('/modules', function(req, res, next) {
                 output.push(f);
             }
         });
-        
-        console.log(output);
+
         res.send(output.join("\n"));
             
     });
 
+});
+
+app.get('/readme', function(req, res, next) {
+        
+    var filename = req.query.filename;
+    
+    var text = fs.readFileSync(__dirname+'/node_modules/'+filename+"/README.md", 'utf8');
+    
+    res.send(md.render(text));
+    
 });
 
 // catch 404 and forward to error handler

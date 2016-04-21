@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>local-doc</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
       
     <style type="text/css">
     
         #container {
-            width: 80%;
+            width: 60%;
             margin: 0 auto;
-            text-align: center;
         }
         
         input[type=text] {
             padding: 10px;
-            width: 70%;
+            width: 85%;
         }
         
         input[type=button] {
@@ -29,6 +31,10 @@
             padding: 12px;            
         }
         
+        .rendered-file {
+            width: 98%;
+        }
+        
     </style>  
     
     
@@ -37,14 +43,13 @@
       <div id="container"> 
           <input id="modules" type="text" placeholder="search"><input id="search-button" type="button" value="Search">
           
-          <div class="result"></div>
+          <div class="rendered-file"></div>
       </div>      
       
       <script type="text/javascript">
           $(function() {
       
               $.get('/modules', function(data){
-                        $('.result').html(data);  
                         var results = data.split("\n");
                   
                         $( "#modules" ).autocomplete({
@@ -53,7 +58,9 @@
               });      
 
               $("#search-button").on('click', function(){
-                    //Do the markdown rendering and stuff
+                    $.get("/readme", {filename : $("#modules").val()}, function(data){
+                        $('.rendered-file').html(data);
+                    });
               });
         });   
       </script>
