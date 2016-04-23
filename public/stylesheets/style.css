@@ -6,3 +6,26 @@ body {
 a {
   color: #00B7FF;
 }
+
+#container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+input[type=text] {
+    padding: 10px;
+    width: 85%;
+}
+
+input[type=button] {
+    background: red;
+    width: 10%;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    padding: 12px;            
+}
+
+.rendered-file {
+    width: 98%;
+}

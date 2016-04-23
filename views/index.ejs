@@ -9,61 +9,15 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+  
+    <script src="/javascripts/main.js"></script>
       
-    <style type="text/css">
-    
-        #container {
-            width: 60%;
-            margin: 0 auto;
-        }
-        
-        input[type=text] {
-            padding: 10px;
-            width: 85%;
-        }
-        
-        input[type=button] {
-            background: red;
-            width: 10%;
-            color: white;
-            border: 0;
-            cursor: pointer;
-            padding: 12px;            
-        }
-        
-        .rendered-file {
-            width: 98%;
-        }
-        
-    </style>  
-    
-    
   </head>
   <body>
       <div id="container"> 
           <input id="modules" type="text" placeholder="search"><input id="search-button" type="button" value="Search">
           
           <div class="rendered-file"></div>
-      </div>      
-      
-      <script type="text/javascript">
-          $(function() {
-      
-              $.get('/modules', function(data){
-                        var results = data.split("\n");
-                  
-                        $( "#modules" ).autocomplete({
-                            source: results
-                        });
-              });      
-
-              $("#search-button").on('click', function(){
-                    $.get("/readme", {filename : $("#modules").val()}, function(data){
-                        $('.rendered-file').html(data);
-                    });
-              });
-        });   
-      </script>
-      
+      </div>            
   </body>
 </html>
