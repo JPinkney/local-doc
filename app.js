@@ -43,7 +43,8 @@ app.get('/modules', function(req, res, next) {
         
     var output = [];
     
-    fs.readdir(__dirname+'/node_modules', function(err, files) {
+    //fs.readdir(__dirname+'/node_modules', function(err, files) {
+    fs.readdir(__dirname, function(err, files) {
         
         files.forEach(function(f) {
             if(f[0] !== '.'){
