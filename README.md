@@ -30,7 +30,6 @@ The code above will make local-doc be available at localhost:8080
 
 ### Todos
 
- - Write Tests
  - Integrate node js global folder
 
 License
