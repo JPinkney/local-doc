@@ -3,7 +3,7 @@
 Local-doc is a local readme viewer for all readmes located in a node js node_module folder
 
 ### Version
-0.0.5
+1.0.1
 
 ### Installation
 
